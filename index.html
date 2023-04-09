@@ -233,12 +233,12 @@
                     // {
                     //     var fb=255-b;  
                     // }
-                    var fr=(255-r) ; 
-                    var fg=(255-g) ;
-                    var fb=(255-b) ;
-                    canvasData.data[idx + 0] = fr; // Red channel  
-                    canvasData.data[idx + 1] = fg; // Green channel  
-                    canvasData.data[idx + 2] = fb; // Blue channel  
+                    // var fr=255-r; 
+                    // var fg=255-g;
+                    // var fb=255-b;
+                    canvasData.data[idx + 0] = b; // Red channel  
+                    canvasData.data[idx + 1] = g; // Green channel  
+                    canvasData.data[idx + 2] = r; // Blue channel  
                     canvasData.data[idx + 3] = 255; // Alpha channel   
                     // add black border  
                     // if(x < 8 || y < 8 || x > (canvasData.width - 8) || y > (canvasData.height - 8))   
