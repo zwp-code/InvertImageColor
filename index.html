@@ -1,289 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-        body {
-            cursor:default;
-        }
-
-        #result {
-            display: flex;
-            align-items: flex-start;
-            justify-content: flex-start;
-        }
-    </style>
-</head>
-<body>
-    <p>
-        <label>select an image file：</label>
-        <input type="file" id="fileInput" />
-        <button>Transform</button>
-        <button onclick="downloadIamge()">Download</button>
-    </p>
-    <div id="result"></div>
-    <!-- <img id="invert" src="./a1.jpg"/> -->
-
-    <script>
-        let fileInput = document.querySelector("#fileInput");
-        let result = document.querySelector("#result");
-        let canvas = document.createElement('canvas');
-        let button = document.querySelector("button");
-        let originImgData = null;
-        let transformImgData = null;
-        let imgWidth = 0;
-        let imgHeight = 0;
-
-        button.addEventListener('click', () => {
-            document.body.style.cursor = "wait";
-            transformImgData = negatives(originImgData);
-            const ctx = canvas.getContext("2d");
-            ctx.putImageData(transformImgData, 0, 0);
-            // const matrixObj = ctx.createImageData(canvas.width, canvas.height);
-            // matrixObj.data.set(transformImgData);
-            // ctx.putImageData(matrixObj, 0, 0);
-
-            let previewUrl = canvas.toDataURL('image/png');
-            let previewImg = document.createElement('img');
-            previewImg.src = previewUrl;
-            previewImg.style.width = imgWidth / 3 + 'px';
-            previewImg.style.height = imgHeight / 3 + 'px';
-            result.appendChild(previewImg);
-            document.body.style.cursor = "default";
-        });
-
-        function downloadIamge () 
-        {
-            //data为原始RGBA的数据,width ,height 为原始图片宽和高
-            // let m_data = Uint8ClampedArray.from(transformImgData);
-            // console.log(imgWidth,imgHeight);
-            // let m_imageData = new ImageData(m_data,imgWidth,imgHeight);
-            // const canvas_new = document.createElement('canvas');
-            // canvas_new.width = imgWidth;
-            // canvas_new.height = imgHeight;
-            // canvas_new.getContext('2d').putImageData(m_imageData, 0, 0);
-            const url = canvas.toDataURL('image/png'); // 得到图片的base64编码数据
-            const a = document.createElement('a'); // 生成一个a元素
-            const event = new MouseEvent('click'); // 创建一个单击事件
-            a.download = 'photo'; // 设置图片名称
-            a.href = url; // 将生成的URL设置为a.href属性
-            a.dispatchEvent(event); // 触发a的单击事件
-        }
-
-        if(typeof FileReader==='undefined'){ 
-            result.innerHTML = "Sorry, your browser doesn't support FileReader"; 
-            fileInput.setAttribute('disabled','disabled'); 
-        }else{ 
-            fileInput.addEventListener('change',readFile,false); 
-        } 
-
-
-        function readFile () {
-            var file = this.files[0]; 
-            if(!/image\/\w+/.test(file.type)){ 
-                alert("文件必须为图片！"); 
-                return false; 
-            } 
-            var reader = new FileReader(); 
-            reader.readAsDataURL(file); 
-            reader.onload = function(e){ 
-                setImage(this.result);
-            }
-        }
-
-        function setImage(res)
-        {
-            let image = new Image();
-            image.src = res;
-            image.onload=function() {
-                imgWidth = image.width;
-                imgHeight = image.height;
-
-                let previewImg = document.createElement('img');
-                previewImg.src = res;
-                previewImg.style.width = imgWidth / 3 + 'px';
-                previewImg.style.height = imgHeight / 3 + 'px';
-                result.appendChild(previewImg);
-
-                canvas.width = imgWidth;
-                canvas.height = imgHeight;
-                const context = canvas.getContext('2d');
-                context.drawImage(image,0, 0, imgWidth , imgHeight);
-                // result.appendChild(canvas);
-                const imgData = context.getImageData(0,0,canvas.width,canvas.height);
-                originImgData = imgData; // 原始的一维数组
-                console.log(imgData.data);
-            }
-
-        }
-
-        function transformColor (data, w, h)
-        {
-            let m_Data = normalize(data, w, h);
-            // 255 - 原rgb = 新rgb 255和0不转换
-            for(let i = 0; i < m_Data.length; i++)
-            {
-                for(let j = 0; j < m_Data[i].length; j++)
-                {
-                    if ((m_Data[i][j][0] * 0.299 + m_Data[i][j][1] * 0.587 + m_Data[i][j][2] * 0.114) > 186)
-                    {
-                        m_Data[i][j] = [0, 0, 0, m_Data[i][j][3]];
-                    }
-                    // for(let k = 0; k < m_Data[i][j].length; k++) 
-                    // {
-                        // if (k < 3)
-                        // {
-                            // if (m_Data[i][j][k] !== 255 && m_Data[i][j][k] !== 0)
-                            // {
-                            //     m_Data[i][j][k] = 255 - m_Data[i][j][k];
-                            // }
-                            // if (m_Data[i][j][k] * 0.299 + m_Data[i][j][k+1] * 0.587 + m_Data[i][j][k+2] * 0.114 > 186)
-                            // {
-                            //     m_Data[i][j] = [0, 0, 0, ];
-                            // }
-                        // }
-                        // m_Data[i][j][k] = m_Data[i][j][k];
-                        // if (m_Data[i][j][k] !== 255 && m_Data[i][j][k] !== 0)
-                        // {
-                        //     m_Data[i][j][k] = 255 - m_Data[i][j][k];
-                        // }
-                        // let pointRGB = m_Data[i][j].slice(0,3);
-                        // if (pointRGB[0] < 200 && pointRGB[0] > )
-                        
-                    // }
-                }
-            }
-            return restoreData(m_Data);
-        }
-
-        function oppositeColor(a, ilighten) {
-            a = a.replace('#', '');
-            //var max16 = 15;
-            var max16 = Math.floor(15 + (ilighten || 0));
-            if (max16 < 0 || max16 > 15) max16 = 15;
-
-            var c16,
-                c10,
-                b = [];
-
-            for (var i = 0; i < a.length; i++) {
-                c16 = parseInt(a.charAt(i), 16); // to 16进制
-                c10 = parseInt(max16 - c16, 10); // 10进制计算
-                if (c10 < 0) c10 = Math.abs(c10);
-                b.push(c10.toString(16)); // to 16进制
-            }
-            return '#' + b.join('');
-        }
-
-        // 转多维数组
-        function normalize(data,width,height){
-            const list = [];
-            const result = [];
-            const len = Math.ceil(data.length/4);
-            // 将每一个像素点的rgba四个值组合在一起
-            for(i = 0;i<len;i++){
-                const start = i*4;
-                list.push([data[start],data[start+1],data[start+2],data[start+3]]);
-            }
-            //根据图形的宽和高将数据进行分类
-            for(hh = 0;hh < height;hh++){
-                const tmp = [];
-                for(ww = 0; ww < width;ww++){
-                tmp.push(list[hh*width + ww]);
-                }
-                result.push(tmp);
-            }
-            return result;
-        }
-
-        // 转一维数组
-        function restoreData(data){
-            const result = [];
-            for(let i = 0;i<data.length;i++){
-                for(let j = 0;j<data[i].length;j++){
-                result.push(data[i][j][0],data[i][j][1],data[i][j][2],data[i][j][3]);
-                }
-            }
-            return result;
-        }
-
-        function negatives(canvasData)  
-        {  
-            for ( var x = 0; x < canvasData.width; x++) {  
-                for ( var y = 0; y < canvasData.height; y++) {  
-                
-                    // Index of the pixel in the array  
-                    var idx = (x + y * canvasData.width) * 4;  
-                    var r = canvasData.data[idx + 0];  
-                    var g = canvasData.data[idx + 1];  
-                    var b = canvasData.data[idx + 2];  
-
-                    // if (255 - r >= 15)
-                    // {
-                    //     var fr=255-r;  
-                    // }
-                    // if (255 - g >= 15)
-                    // {
-                    //     var fg=255-g;
-                    // }
-                    // if (255 - b >= 15) 
-                    // {
-                    //     var fb=255-b;  
-                    // }
-                    // var fr=255-r; 
-                    // var fg=255-g;
-                    // var fb=255-b;
-                    canvasData.data[idx + 0] = b; // Red channel  
-                    canvasData.data[idx + 1] = g; // Green channel  
-                    canvasData.data[idx + 2] = r; // Blue channel  
-                    canvasData.data[idx + 3] = 255; // Alpha channel   
-                    // add black border  
-                    // if(x < 8 || y < 8 || x > (canvasData.width - 8) || y > (canvasData.height - 8))   
-                    // {  
-                    //     canvasData.data[idx + 0] = 0;  
-                    //     canvasData.data[idx + 1] = 0;  
-                    //     canvasData.data[idx + 2] = 0;  
-                    // }  
-                }  
-            }  
-            return canvasData;  
-        }  
-
-//         var invert = function(el){
-//             var canvas = document.createElement('canvas');
-//             var w = canvas.width = el.offsetWidth,
-//                     h = canvas.height = el.offsetHeight;
-//             var ctx = canvas.getContext('2d');
-//             ctx.drawImage(el, 0, 0);
-            
-//             // 对像素作处理
-//             var imgData = ctx.getImageData(0, 0, w, h), d = imgData.data;
-//             for (let i = 0, len = d.length; i < len; i+=4){
-//                 var r = d[i],
-//                     g = d[i+1],
-//                     b = d[i+2];
-//                 d[i] = 255 - r;
-//                 d[i+1] = 255 - g;
-//                 d[i+2] = 255 - b;
-//             }
-//             ctx.putImageData(imgData, 0, 0);
-
-//             // 导出
-//             var img = new Image();
-//             img.src = ctx.toDataURL("image/*");
-//             return img;
-//             };
-
-// // 调用
-// var img = invert(document.getElementById('invert'));
-// document.body.appendChild(img);
-
-
-    </script>
-</body>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Zcode</title>
+    <meta name="generator" content="VuePress 1.9.7">
+    <link rel="icon" href="/logo.png">
+    <meta name="description" content="个人项目记录">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    
+    <link rel="preload" href="/assets/css/0.styles.e3e391ad.css" as="style"><link rel="preload" href="/assets/js/app.dd36de3b.js" as="script"><link rel="preload" href="/assets/js/2.04137649.js" as="script"><link rel="preload" href="/assets/js/7.f39602d3.js" as="script"><link rel="prefetch" href="/assets/js/10.219ac19e.js"><link rel="prefetch" href="/assets/js/11.8ca00040.js"><link rel="prefetch" href="/assets/js/12.b48e6842.js"><link rel="prefetch" href="/assets/js/13.0931c147.js"><link rel="prefetch" href="/assets/js/14.1de70f3a.js"><link rel="prefetch" href="/assets/js/15.ed9503a7.js"><link rel="prefetch" href="/assets/js/16.42585914.js"><link rel="prefetch" href="/assets/js/17.b2122f94.js"><link rel="prefetch" href="/assets/js/3.546ba140.js"><link rel="prefetch" href="/assets/js/4.ed8f2e2d.js"><link rel="prefetch" href="/assets/js/5.32dde0b2.js"><link rel="prefetch" href="/assets/js/6.c7b54f12.js"><link rel="prefetch" href="/assets/js/8.19743e6b.js"><link rel="prefetch" href="/assets/js/9.71fd8e3d.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.e3e391ad.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container no-sidebar"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" aria-current="page" class="home-link router-link-exact-active router-link-active"><img src="/logo.png" alt="Zcode" class="logo"> <span class="site-name can-hide">Zcode</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" aria-current="page" class="nav-link router-link-exact-active router-link-active">
+  首页
+</a></div><div class="nav-item"><a href="/pages/project/dbeditor.html" class="nav-link">
+  项目
+</a></div><div class="nav-item"><a href="https://gitee.com/zhong_wei_peng" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Gitee
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div><div class="nav-item"><a href="https://github.com/zwp-code" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Github
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/" aria-current="page" class="nav-link router-link-exact-active router-link-active">
+  首页
+</a></div><div class="nav-item"><a href="/pages/project/dbeditor.html" class="nav-link">
+  项目
+</a></div><div class="nav-item"><a href="https://gitee.com/zhong_wei_peng" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Gitee
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div><div class="nav-item"><a href="https://github.com/zwp-code" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Github
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav>  <!----> </aside> <main aria-labelledby="main-title" class="home"><header class="hero"><img src="/laosiji.png" alt="hero"> <h1 id="main-title">
+      Zcode
+    </h1> <p class="description">
+      个人项目记录
+    </p> <p class="action"><a href="/pages/project/dbeditor.html" class="nav-link action-button">
+  Get Started →
+</a></p></header> <div class="features"><div class="feature"><h2>坚持</h2> <p>大多数人想要改造这个世界，但却罕有人想改造自己。</p></div><div class="feature"><h2>奋进</h2> <p>莫找借口失败，只找理由成功。</p></div><div class="feature"><h2>努力</h2> <p>使人疲惫的不是远方的高山，而是鞋里的一粒沙子。</p></div></div> <div class="theme-default-content custom content__default"></div> <div class="footer">
+    MIT Licensed | Copyright © 2024
+  </div></main></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.dd36de3b.js" defer></script><script src="/assets/js/2.04137649.js" defer></script><script src="/assets/js/7.f39602d3.js" defer></script>
+  </body>
 </html>
-
-

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Nginx快速入门 | Zcode</title>
+    <meta name="generator" content="VuePress 1.9.7">
+    <link rel="icon" href="/logo.png">
+    <meta name="description" content="个人项目记录">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    
+    <link rel="preload" href="/assets/css/0.styles.e3e391ad.css" as="style"><link rel="preload" href="/assets/js/app.dd36de3b.js" as="script"><link rel="preload" href="/assets/js/2.04137649.js" as="script"><link rel="preload" href="/assets/js/9.71fd8e3d.js" as="script"><link rel="prefetch" href="/assets/js/10.219ac19e.js"><link rel="prefetch" href="/assets/js/11.8ca00040.js"><link rel="prefetch" href="/assets/js/12.b48e6842.js"><link rel="prefetch" href="/assets/js/13.0931c147.js"><link rel="prefetch" href="/assets/js/14.1de70f3a.js"><link rel="prefetch" href="/assets/js/15.ed9503a7.js"><link rel="prefetch" href="/assets/js/16.42585914.js"><link rel="prefetch" href="/assets/js/17.b2122f94.js"><link rel="prefetch" href="/assets/js/3.546ba140.js"><link rel="prefetch" href="/assets/js/4.ed8f2e2d.js"><link rel="prefetch" href="/assets/js/5.32dde0b2.js"><link rel="prefetch" href="/assets/js/6.c7b54f12.js"><link rel="prefetch" href="/assets/js/7.f39602d3.js"><link rel="prefetch" href="/assets/js/8.19743e6b.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.e3e391ad.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><img src="/logo.png" alt="Zcode" class="logo"> <span class="site-name can-hide">Zcode</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link">
+  首页
+</a></div><div class="nav-item"><a href="/pages/project/dbeditor.html" class="nav-link">
+  项目
+</a></div><div class="nav-item"><a href="https://gitee.com/zhong_wei_peng" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Gitee
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div><div class="nav-item"><a href="https://github.com/zwp-code" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Github
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link">
+  首页
+</a></div><div class="nav-item"><a href="/pages/project/dbeditor.html" class="nav-link">
+  项目
+</a></div><div class="nav-item"><a href="https://gitee.com/zhong_wei_peng" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Gitee
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div><div class="nav-item"><a href="https://github.com/zwp-code" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Github
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>Vue</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/pages/article/vue.html" class="sidebar-link">Vue开发配置</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/pages/article/vue.html#_1-使用-vue-cli-创建" class="sidebar-link">1.使用 vue-cli 创建</a></li><li class="sidebar-sub-header"><a href="/pages/article/vue.html#_2-使用-vite-创建" class="sidebar-link">2.使用 vite 创建</a></li></ul></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>Docker</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/pages/article/docker.html" class="sidebar-link">Docker快速入门</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/pages/article/docker.html#_1-docker概述" class="sidebar-link">1.Docker概述</a></li><li class="sidebar-sub-header"><a href="/pages/article/docker.html#_2-虚拟化技术和容器化技术" class="sidebar-link">2.虚拟化技术和容器化技术</a></li><li class="sidebar-sub-header"><a href="/pages/article/docker.html#_3-docker的基本组成" class="sidebar-link">3.Docker的基本组成</a></li><li class="sidebar-sub-header"><a href="/pages/article/docker.html#_4-阿里云镜像加速" class="sidebar-link">4.阿里云镜像加速</a></li><li class="sidebar-sub-header"><a href="/pages/article/docker.html#_5-docker的安装和配置" class="sidebar-link">5.Docker的安装和配置</a></li><li class="sidebar-sub-header"><a href="/pages/article/docker.html#_6-docker容器的运行流程" class="sidebar-link">6.Docker容器的运行流程</a></li><li class="sidebar-sub-header"><a href="/pages/article/docker.html#_7-底层运行原理" class="sidebar-link">7.底层运行原理</a></li><li class="sidebar-sub-header"><a href="/pages/article/docker.html#_8-docker整体架构" class="sidebar-link">8.Docker整体架构</a></li><li class="sidebar-sub-header"><a href="/pages/article/docker.html#_9-docker常用命令" class="sidebar-link">9.Docker常用命令</a></li><li class="sidebar-sub-header"><a href="/pages/article/docker.html#_10-docker镜像详解" class="sidebar-link">10.Docker镜像详解</a></li><li class="sidebar-sub-header"><a href="/pages/article/docker.html#_11-常用容器部署" class="sidebar-link">11.常用容器部署</a></li><li class="sidebar-sub-header"><a href="/pages/article/docker.html#_12-容器数据卷" class="sidebar-link">12.容器数据卷</a></li><li class="sidebar-sub-header"><a href="/pages/article/docker.html#_13-dockerfile" class="sidebar-link">13.DockerFile</a></li><li class="sidebar-sub-header"><a href="/pages/article/docker.html#_14-制作并发布tomcat镜像" class="sidebar-link">14.制作并发布Tomcat镜像</a></li></ul></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Nginx</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/pages/article/nginx.html" aria-current="page" class="active sidebar-link">Nginx快速入门</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/pages/article/nginx.html#_1-nginx产生的原因" class="sidebar-link">1.Nginx产生的原因</a></li><li class="sidebar-sub-header"><a href="/pages/article/nginx.html#_2-nginx简介" class="sidebar-link">2.Nginx简介</a></li><li class="sidebar-sub-header"><a href="/pages/article/nginx.html#_3-nginx的安装" class="sidebar-link">3.Nginx的安装</a></li><li class="sidebar-sub-header"><a href="/pages/article/nginx.html#_4-nginx常用命令" class="sidebar-link">4.Nginx常用命令</a></li><li class="sidebar-sub-header"><a href="/pages/article/nginx.html#_5-nginx文件配置" class="sidebar-link">5.Nginx文件配置</a></li><li class="sidebar-sub-header"><a href="/pages/article/nginx.html#_6-解决跨域" class="sidebar-link">6.解决跨域</a></li></ul></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>Pinia</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/pages/article/pinia.html" class="sidebar-link">Pinia快速入门</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/pages/article/pinia.html#_1-前言" class="sidebar-link">1.前言</a></li><li class="sidebar-sub-header"><a href="/pages/article/pinia.html#_2-什么是pinia" class="sidebar-link">2.什么是Pinia</a></li><li class="sidebar-sub-header"><a href="/pages/article/pinia.html#_3-为什么要使用pinia" class="sidebar-link">3.为什么要使用Pinia</a></li><li class="sidebar-sub-header"><a href="/pages/article/pinia.html#_4-如何使用pinia" class="sidebar-link">4.如何使用Pinia</a></li><li class="sidebar-sub-header"><a href="/pages/article/pinia.html#_5-总结" class="sidebar-link">5.总结</a></li></ul></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="nginx快速入门"><a href="#nginx快速入门" class="header-anchor">#</a> Nginx快速入门</h1> <h2 id="_1-nginx产生的原因"><a href="#_1-nginx产生的原因" class="header-anchor">#</a> 1.Nginx产生的原因</h2> <p>一个公司的项目刚刚上线的时候，并发量小，用户使用的少，所以在低并发的情况下，一个jar包启动应用就够了，然后内部tomcat返回内容给用户</p> <p><img src="https://img-blog.csdnimg.cn/c3f81b694d1448d09c372bc7f93f77a1.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NDA4Mzkw,size_16,color_FFFFFF,t_70" alt="[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-oyCWh5ol-1628237351424)(Nginx.assets/1628221226329.png)]"></p> <p>慢慢的，使用平台的用户越来越多了，并发量慢慢增大了，这时候一台服务器满足不了我们的需求了</p> <p><img src="https://img-blog.csdnimg.cn/3532749669994c2db0d4f2f0aeb2815b.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NDA4Mzkw,size_16,color_FFFFFF,t_70" alt="[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-BQ7Is1Yt-1628237351429)(Nginx.assets/1628221258323.png)]"></p> <p>于是我们横向扩展，又增加了服务器。这个时候几个项目启动在不同的服务器上，用户要访问，就需要增加一个代理服务器了，通过代理服务器来帮我们转发和处理请求。</p> <p><img src="https://img-blog.csdnimg.cn/39393db0ba6443d0b9a57113d75d3779.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NDA4Mzkw,size_16,color_FFFFFF,t_70" alt="[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-hG0nVQU8-1628237351433)(Nginx.assets/1628221284447.png)]"></p> <blockquote><p>我们希望这个<strong>代理服务器可以帮助我们接收用户的请求，然后将用户的请求按照规则帮我们转发到不同的服务器节点之上。这个过程用户是无感知的</strong>，用户并不知道是哪个服务器返回的结果，我们还希望他可以<strong>按照服务器的性能提供不同的权重选择</strong>。保证最佳体验！所以我们使用了Nginx。</p></blockquote> <h2 id="_2-nginx简介"><a href="#_2-nginx简介" class="header-anchor">#</a> 2.Nginx简介</h2> <h3 id="_1-介绍"><a href="#_1-介绍" class="header-anchor">#</a> （1）介绍</h3> <p>Nginx (engine x) 是一个高性能的HTTP和反向代理web服务器，同时也提供了IMAP/POP3/SMTP服务。Nginx是由伊戈尔·赛索耶夫为俄罗斯访问量第二的Rambler.ru站点（俄文：Рамблер）开发的，第一个公开版本0.1.0发布于2004年10月4日。2011年6月1日，nginx 1.0.4发布。</p> <p>其特点是占有内存少，并发能力强，事实上nginx的并发能力在同类型的网页服务器中表现较好，中国大陆使用nginx网站用户有：百度、京东、新浪、网易、腾讯、淘宝等。在全球活跃的网站中有12.18%的使用比率，大约为2220万个网站。</p> <p>Nginx 是一个安装非常的简单、配置文件非常简洁（还能够支持perl语法）、Bug非常少的服务。Nginx 启动特别容易，并且几乎可以做到7*24不间断运行，即使运行数个月也不需要重新启动。你还能够不间断服务的情况下进行软件版本的升级。</p> <p>Nginx代码完全用C语言从头写成。官方数据测试表明能够支持高达 50,000 个并发连接数的响应。</p> <h3 id="_1-作用"><a href="#_1-作用" class="header-anchor">#</a> （1）作用</h3> <p><strong>Http代理，反向代理：作为web服务器最常用的功能之一，尤其是反向代理。</strong></p> <ul><li>正向代理：代理是代理客户端的</li></ul> <p><img src="https://img-blog.csdnimg.cn/d62e0a213b4841e08c83f7afdad41fff.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NDA4Mzkw,size_16,color_FFFFFF,t_70" alt="[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-pEhZ2NO8-1628237351438)(Nginx.assets/1628221458725.png)]"></p> <ul><li>反向代理 ：代理是代理服务器的，所以用户是无感知的，比如，百度的服务器是在不同的服务器上，我们只需要搜索baidu.com就行。</li> <li><img src="https://img-blog.csdnimg.cn/efbd618f4b904bf6a8d117a4fe2a4278.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NDA4Mzkw,size_16,color_FFFFFF,t_70" alt="[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-gEQ62nTv-1628237351440)(Nginx.assets/1628221515354.png)]"></li></ul> <p>Nginx提供的负载均衡策略有2种：内置策略和扩展策略。内置策略为轮询，加权轮询，Ip hash。扩展策略</p> <ul><li>轮询</li></ul> <p><img src="https://img-blog.csdnimg.cn/3d7c9116268e4706affd2591eedb59dd.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NDA4Mzkw,size_16,color_FFFFFF,t_70" alt="[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-U4cIH5FP-1628237351441)(Nginx.assets/1628221543126.png)]"></p> <ul><li>加权轮询，因为可能不同服务器性能不一样，能接收的请求数量不同</li></ul> <p><img src="https://img-blog.csdnimg.cn/0bbf581ed8144c4fbbe46f2ed894a213.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NDA4Mzkw,size_16,color_FFFFFF,t_70" alt="[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-qQpkwFEy-1628237351443)(Nginx.assets/1628221558749.png)]"></p> <ul><li>iphash对客户端请求的ip进行hash操作，然后根据hash结果将同一个客户端ip的请求分发给同一台服务器进行处理，可以解决session不共享的问题。</li></ul> <p><img src="https://img-blog.csdnimg.cn/db239d9a10e147b5b8d50589e989c629.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NDA4Mzkw,size_16,color_FFFFFF,t_70" alt="[外链图片转存失败,源站可能有防盗链机制,建议将图片保存下来直接上传(img-5FMkmlv2-1628237351443)(Nginx.assets/1628221600221.png)]"></p> <ul><li>动静分离，在我们的软件开发中，有些请求是需要后台处理的，有些请求是不需要经过后台处理的（如：css、html、jpg、js等等文件），这些不需要经过后台处理的文件称为静态文件。让动态网站里的动态网页根据一定规则把不变的资源和经常变的资源区分开来，动静资源做好了拆分以后，我们就可以根据静态资源的特点将其做缓存操作。提高资源响应的速度。
+<img src="https://img-blog.csdnimg.cn/163f19572b724b8ab0cacdf31e05ff0d.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NDA4Mzkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></li></ul> <h2 id="_3-nginx的安装"><a href="#_3-nginx的安装" class="header-anchor">#</a> 3.Nginx的安装</h2> <h3 id="_1-windows下的安装"><a href="#_1-windows下的安装" class="header-anchor">#</a> （1）Windows下的安装</h3> <ul><li><strong>下载</strong></li></ul> <p>http://nginx.org/en/download.html 下载稳定版本</p> <p><img src="https://img-blog.csdnimg.cn/16a7e716fbb643aabd1342f76899c9f1.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NDA4Mzkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p> <p>解压到文件夹中</p> <p><img src="https://img-blog.csdnimg.cn/8c8ad3f916824b1a958f9ae44b44c5a5.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NDA4Mzkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p> <ul><li><strong>启动Nginx</strong>
+有很多种方法启动nginx</li></ul> <p>(1)直接双击nginx.exe，双击后一个黑色的弹窗一闪而过</p> <p>(2)打开cmd命令窗口，切换到nginx解压目录下，输入命令 nginx.exe ，回车即可</p> <ul><li><p><strong>检查Nginx是否启动成功</strong></p> <p>直接在浏览器地址栏输入网址 http://localhost:80 回车，出现以下页面说明启动成功</p></li></ul> <p><img src="https://img-blog.csdnimg.cn/14e60387ead745abab1b2c6665ec8cb3.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NDA4Mzkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p> <ul><li><strong>配置监听</strong></li></ul> <blockquote><p>nginx的配置文件是conf目录下的nginx.conf，默认配置的nginx监听的端口为80，如果80端口被占用可以修改为未被占用的端口即可。</p> <p>当我们修改了nginx的配置文件nginx.conf 时，不需要关闭nginx后重新启动nginx，只需要执行命令 <code>nginx -s reload</code> 即可让改动生效</p></blockquote> <p><img src="https://img-blog.csdnimg.cn/98a3b98a9166458995cbff6d2ef1805b.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NDA4Mzkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p> <ul><li><strong>关闭Nginx</strong></li></ul> <p>如果使用cmd命令窗口启动nginx， 关闭cmd窗口是不能结束nginx进程的，可使用两种方法关闭nginx</p> <p>(1)输入nginx命令 nginx -s stop(快速停止nginx) 或 nginx -s quit(完整有序的停止nginx)</p> <p>(2)使用taskkill taskkill /f /t /im nginx.exe</p> <div class="language-shell extra-class"><pre class="language-shell"><code>taskkill是用来终止进程的，
+/f是强制终止 <span class="token builtin class-name">.</span>
+/t终止指定的进程和任何由此启动的子进程。
+/im示指定的进程名称 <span class="token builtin class-name">.</span>
+</code></pre></div><h3 id="_2-linux下的安装"><a href="#_2-linux下的安装" class="header-anchor">#</a> （2）Linux下的安装</h3> <ul><li><p><strong>要确定有gcc环境</strong></p> <div class="language-shell extra-class"><pre class="language-shell"><code>gcc -v  <span class="token comment"># 查看版本</span>
+yum <span class="token function">install</span> gcc-c++  <span class="token comment"># 如果没有的话就安装一下</span>
+</code></pre></div></li> <li><p><strong>PCRE pcre-devel 安装</strong></p> <p>PCRE(Perl Compatible Regular Expressions) 是一个Perl库，包括 perl 兼容的正则表达式库。nginx 的 http 模块使用 pcre 来解析正则表达式，所以需要在 linux 上安装 pcre 库，pcre-devel 是使用 pcre 开发的一个二次开发库。nginx也需要此库。命令：</p> <div class="language-shell extra-class"><pre class="language-shell"><code>yum <span class="token function">install</span> -y pcre pcre-devel
+</code></pre></div></li> <li><p><strong>zlib 安装</strong></p> <p>zlib 库提供了很多种压缩和解压缩的方式， nginx 使用 zlib 对 http 包的内容进行 gzip ，所以需要在 Centos 上安装 zlib 库。</p> <div class="language-shell extra-class"><pre class="language-shell"><code>yum <span class="token function">install</span> -y zlib zlib-devel
+</code></pre></div></li> <li><p><strong>OpenSSL 安装</strong></p> <p>OpenSSL 是一个强大的安全套接字层密码库，囊括主要的密码算法、常用的密钥和证书封装管理功能及 SSL 协议，并提供丰富的应用程序供测试或其它目的使用。
+nginx 不仅支持 http 协议，还支持 https（即在ssl协议上传输http），所以需要在 Centos 安装 OpenSSL 库。</p> <div class="language-shell extra-class"><pre class="language-shell"><code>yum <span class="token function">install</span> -y openssl openssl-devel
+</code></pre></div></li> <li><p><strong>下载安装包，并上传到linux上</strong></p> <p><img src="https://img-blog.csdnimg.cn/5ebac34d428641fa817881b32b8fe82d.png" alt="在这里插入图片描述"></p></li> <li><p><strong>解压安装包</strong></p> <div class="language-shell extra-class"><pre class="language-shell"><code><span class="token function">tar</span> -zxvf nginx-1.20.1.tar.gz <span class="token comment"># 解压安装包</span>
+<span class="token builtin class-name">cd</span> nginx-1.20.1/ <span class="token comment"># 进入目录，发现和windows没什么区别</span>
+</code></pre></div></li> <li><p>进行自动配置</p> <div class="language-shell extra-class"><pre class="language-shell"><code>./configure
+</code></pre></div></li> <li><p>执行make命令</p></li> <li><p>执行make install命令</p></li> <li><p>查看是否安装成功</p></li></ul> <div class="language-shell extra-class"><pre class="language-shell"><code><span class="token punctuation">[</span>root@cVzhanshi nginx-1.20.1<span class="token punctuation">]</span><span class="token comment"># whereis nginx</span>
+nginx: /usr/local/nginx
+</code></pre></div><ul><li><p>进入sbin目录，执行可执行文件</p> <p><img src="https://img-blog.csdnimg.cn/0a00fefa13154512a6c6b00b56d002fa.png" alt="在这里插入图片描述"></p></li> <li><p>查看是否执行成功</p> <p><img src="https://img-blog.csdnimg.cn/2d325e988a7145228f11952fc6df713a.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQ1NDA4Mzkw,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p></li></ul> <h2 id="_4-nginx常用命令"><a href="#_4-nginx常用命令" class="header-anchor">#</a> 4.Nginx常用命令</h2> <div class="language-shell extra-class"><pre class="language-shell"><code><span class="token builtin class-name">cd</span> /usr/local/nginx/sbin/
+./nginx  启动
+./nginx -s stop  停止
+./nginx -s quit  安全退出
+./nginx -s reload  重新加载配置文件
+<span class="token function">ps</span> aux<span class="token operator">|</span><span class="token function">grep</span> nginx  查看nginx进程
+</code></pre></div><blockquote><p>注意：如何连接不上，检查阿里云安全组是否开放端口，或者服务器防火墙是否开放端口</p></blockquote> <div class="language-shell extra-class"><pre class="language-shell"><code><span class="token comment"># 开启</span>
+<span class="token function">service</span> firewalld start
+<span class="token comment"># 重启</span>
+<span class="token function">service</span> firewalld restart
+<span class="token comment"># 关闭</span>
+<span class="token function">service</span> firewalld stop
+<span class="token comment"># 查看防火墙规则</span>
+firewall-cmd --list-all
+<span class="token comment"># 查询端口是否开放</span>
+firewall-cmd --query-port<span class="token operator">=</span><span class="token number">8080</span>/tcp
+<span class="token comment"># 开放80端口</span>
+firewall-cmd --permanent --add-port<span class="token operator">=</span><span class="token number">80</span>/tcp
+<span class="token comment"># 移除端口</span>
+firewall-cmd --permanent --remove-port<span class="token operator">=</span><span class="token number">8080</span>/tcp
+<span class="token comment">#重启防火墙(修改配置后要重启防火墙)</span>
+firewall-cmd --reload
+<span class="token comment"># 参数解释</span>
+<span class="token number">1</span>、firwall-cmd：是Linux提供的操作firewall的一个工具；
+<span class="token number">2</span>、--permanent：表示设置为持久；
+<span class="token number">3</span>、--add-port：标识添加的端口；
+</code></pre></div><h2 id="_5-nginx文件配置"><a href="#_5-nginx文件配置" class="header-anchor">#</a> 5.Nginx文件配置</h2> <h3 id="_1-负载均衡"><a href="#_1-负载均衡" class="header-anchor">#</a> （1）负载均衡</h3> <ul><li><strong>轮询</strong></li></ul> <div class="language-shell extra-class"><pre class="language-shell"><code>http <span class="token punctuation">{</span>
+    <span class="token punctuation">..</span>.
+	upstream cvzhanshi<span class="token punctuation">{</span>
+		server <span class="token number">127.0</span>.0.1:8082/ <span class="token assign-left variable">weight</span><span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span>
+		server <span class="token number">127.0</span>.0.1:8081/ <span class="token assign-left variable">weight</span><span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span>
+	<span class="token punctuation">}</span>
+
+
+    server <span class="token punctuation">{</span>
+        listen       <span class="token number">80</span><span class="token punctuation">;</span>
+        server_name  localhost<span class="token punctuation">;</span>
+
+        location / <span class="token punctuation">{</span>
+            root   html<span class="token punctuation">;</span>
+            index  index.html index.htm<span class="token punctuation">;</span>
+			proxy_pass http://cvzhanshi<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token punctuation">..</span>.
+<span class="token punctuation">}</span>
+</code></pre></div><ul><li><p><strong>加权轮询</strong></p> <div class="language-shell extra-class"><pre class="language-shell"><code>upstream bck_testing_01 <span class="token punctuation">{</span>
+  server <span class="token number">192.168</span>.250.220:8080   <span class="token assign-left variable">weight</span><span class="token operator">=</span><span class="token number">3</span>
+  server <span class="token number">192.168</span>.250.221:8080              <span class="token comment"># default weight=1</span>
+  server <span class="token number">192.168</span>.250.222:8080              <span class="token comment"># default weight=1</span>
+<span class="token punctuation">}</span>
+</code></pre></div></li> <li><p><strong>ip Hash</strong></p> <div class="language-shell extra-class"><pre class="language-shell"><code>upstream bck_testing_01 <span class="token punctuation">{</span>
+ 
+  ip_hash<span class="token punctuation">;</span>
+ 
+  <span class="token comment"># with default weight for all (weight=1)</span>
+  server <span class="token number">192.168</span>.250.220:8080
+  server <span class="token number">192.168</span>.250.221:8080
+  server <span class="token number">192.168</span>.250.222:8080
+ 
+<span class="token punctuation">}</span>
+</code></pre></div></li> <li><p><strong>普通 Hash</strong></p> <div class="language-shell extra-class"><pre class="language-shell"><code>upstream bck_testing_01 <span class="token punctuation">{</span>
+ 
+  <span class="token builtin class-name">hash</span> <span class="token variable">$request_uri</span><span class="token punctuation">;</span>
+ 
+  <span class="token comment"># with default weight for all (weight=1)</span>
+  server <span class="token number">192.168</span>.250.220:8080
+  server <span class="token number">192.168</span>.250.221:8080
+  server <span class="token number">192.168</span>.250.222:8080
+ 
+<span class="token punctuation">}</span>
+</code></pre></div></li></ul> <h3 id="_2-网站有多个-webapp-的配置"><a href="#_2-网站有多个-webapp-的配置" class="header-anchor">#</a> （2）<strong>网站有多个 webapp 的配置</strong></h3> <p>当一个网站功能越来越丰富时，往往需要将一些功能相对独立的模块剥离出来，独立维护。这样的话，通常，会有多个 webapp。</p> <p>举个例子：假如 www.helloworld.com 站点有好几个 webapp，finance（金融）、product（产品）、admin（用户中心）。访问这些应用的方式通过上下文(context)来进行区分:</p> <p>www.helloworld.com/finance/</p> <p>www.helloworld.com/product/</p> <p>www.helloworld.com/admin/</p> <p>我们知道，http 的默认端口号是 80，如果在一台服务器上同时启动这 3 个 webapp 应用，都用 80 端口，肯定是不成的。所以，这三个应用需要分别绑定不同的端口号。</p> <p>那么，问题来了，用户在实际访问 www.helloworld.com 站点时，访问不同 webapp，总不会还带着对应的端口号去访问吧。所以，你再次需要用到反向代理来做处理。</p> <p>配置也不难，来看看怎么做吧：</p> <div class="language-shell extra-class"><pre class="language-shell"><code>http <span class="token punctuation">{</span>
+    <span class="token comment">#此处省略一些基本配置</span>
+ 
+    upstream product_server<span class="token punctuation">{</span>
+        server www.helloworld.com:8081<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+ 
+    upstream admin_server<span class="token punctuation">{</span>
+        server www.helloworld.com:8082<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+ 
+    upstream finance_server<span class="token punctuation">{</span>
+        server www.helloworld.com:8083<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+ 
+    server <span class="token punctuation">{</span>
+        <span class="token comment">#此处省略一些基本配置</span>
+        <span class="token comment">#默认指向product的server</span>
+        location / <span class="token punctuation">{</span>
+            proxy_pass http://product_server<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+ 
+        location /product/<span class="token punctuation">{</span>
+            proxy_pass http://product_server<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+ 
+        location /admin/ <span class="token punctuation">{</span>
+            proxy_pass http://admin_server<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+ 
+        location /finance/ <span class="token punctuation">{</span>
+            proxy_pass http://finance_server<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h2 id="_6-解决跨域"><a href="#_6-解决跨域" class="header-anchor">#</a> 6.解决跨域</h2> <p>首先，在 enable-cors.conf 文件中设置 cors ：</p> <div class="language-shell extra-class"><pre class="language-shell"><code><span class="token comment"># allow origin list</span>
+<span class="token builtin class-name">set</span> <span class="token variable">$ACAO</span> <span class="token string">'*'</span><span class="token punctuation">;</span>
+ 
+<span class="token comment"># set single origin</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token variable">$http_origin</span> ~* <span class="token punctuation">(</span>www.helloworld.com<span class="token punctuation">)</span>$<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token builtin class-name">set</span> <span class="token variable">$ACAO</span> <span class="token variable">$http_origin</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+ 
+<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token variable">$cors</span> <span class="token operator">=</span> <span class="token string">&quot;trueget&quot;</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    add_header <span class="token string">'Access-Control-Allow-Origin'</span> <span class="token string">&quot;<span class="token variable">$http_origin</span>&quot;</span><span class="token punctuation">;</span>
+    add_header <span class="token string">'Access-Control-Allow-Credentials'</span> <span class="token string">'true'</span><span class="token punctuation">;</span>
+    add_header <span class="token string">'Access-Control-Allow-Methods'</span> <span class="token string">'GET, POST, OPTIONS'</span><span class="token punctuation">;</span>
+    add_header <span class="token string">'Access-Control-Allow-Headers'</span> <span class="token string">'DNT,X-Mx-ReqToken,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type'</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+ 
+<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token variable">$request_method</span> <span class="token operator">=</span> <span class="token string">'OPTIONS'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token builtin class-name">set</span> <span class="token variable">$cors</span> <span class="token string">&quot;<span class="token variable">${cors}</span>options&quot;</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+ 
+<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token variable">$request_method</span> <span class="token operator">=</span> <span class="token string">'GET'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token builtin class-name">set</span> <span class="token variable">$cors</span> <span class="token string">&quot;<span class="token variable">${cors}</span>get&quot;</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+ 
+<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token variable">$request_method</span> <span class="token operator">=</span> <span class="token string">'POST'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token builtin class-name">set</span> <span class="token variable">$cors</span> <span class="token string">&quot;<span class="token variable">${cors}</span>post&quot;</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>接下来，在你的服务器中 <code>include enable-cors.conf</code> 来引入跨域配置：</p> <div class="language-shell extra-class"><pre class="language-shell"><code><span class="token comment"># ----------------------------------------------------</span>
+<span class="token comment"># 此文件为项目 nginx 配置片段</span>
+<span class="token comment"># 可以直接在 nginx config 中 include（推荐）</span>
+<span class="token comment"># 或者 copy 到现有 nginx 中，自行配置</span>
+<span class="token comment"># www.helloworld.com 域名需配合 dns hosts 进行配置</span>
+<span class="token comment"># 其中，api 开启了 cors，需配合本目录下另一份配置文件</span>
+<span class="token comment"># ----------------------------------------------------</span>
+upstream front_server<span class="token punctuation">{</span>
+  server www.helloworld.com:9000<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+upstream api_server<span class="token punctuation">{</span>
+  server www.helloworld.com:8080<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+ 
+server <span class="token punctuation">{</span>
+  listen       <span class="token number">80</span><span class="token punctuation">;</span>
+  server_name  www.helloworld.com<span class="token punctuation">;</span>
+ 
+  location ~ ^/api/ <span class="token punctuation">{</span>
+    include enable-cors.conf<span class="token punctuation">;</span>
+    proxy_pass http://api_server<span class="token punctuation">;</span>
+    rewrite <span class="token string">&quot;^/api/(.*)$&quot;</span> /<span class="token variable">$1</span> <span class="token builtin class-name">break</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+ 
+  location ~ ^/ <span class="token punctuation">{</span>
+    proxy_pass http://front_server<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/pages/article/docker.html" class="prev">
+        Docker快速入门
+      </a></span> <span class="next"><a href="/pages/article/pinia.html">
+        Pinia快速入门
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/assets/js/app.dd36de3b.js" defer></script><script src="/assets/js/2.04137649.js" defer></script><script src="/assets/js/9.71fd8e3d.js" defer></script>
+  </body>
+</html>
